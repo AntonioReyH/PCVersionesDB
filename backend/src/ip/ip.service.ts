@@ -6,10 +6,11 @@ export class IpService {
   constructor(private prisma: PrismaService) {}
 
   // Guardar una nueva IP
-  async registrarIpV4(addressV4: string) {
+  async registrarIpV4(addressV4: string, addressV6?: string) {
     return this.prisma.iPRecord.create({
       data: { 
-        addressV4: addressV4 
+        addressV4: addressV4,
+        addressV6: addressV6 || null
       },
     });
   }

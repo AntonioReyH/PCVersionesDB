@@ -11,5 +11,6 @@ datasource db {
 model IPRecord {
   id        Int      @id @default(autoincrement())
   addressV4 String   @unique
+  addressV6 String?  // <-- NUEVA COLUMNA OPCIONAL
   createdAt DateTime @default(now())
 }
