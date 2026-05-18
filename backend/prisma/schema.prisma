@@ -7,10 +7,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Estructura v1: Solo permite IPv4
 model IPRecord {
   id        Int      @id @default(autoincrement())
   addressV4 String   @unique
-  addressV6 String?  // <-- NUEVA COLUMNA OPCIONAL
   createdAt DateTime @default(now())
 }
