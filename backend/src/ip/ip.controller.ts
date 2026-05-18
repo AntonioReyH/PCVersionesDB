@@ -6,8 +6,11 @@ export class IpController {
   constructor(private readonly ipService: IpService) {}
 
   @Post()
-  crear(@Body('addressV4') addressV4: string) {
-    return this.ipService.registrarIp(addressV4);
+  crear(
+    @Body('addressV4') addressV4: string,
+    @Body('addressV6') addressV6?: string // <-- Recibimos el nuevo campo
+  ) {
+    return this.ipService.registrarIp(addressV4, addressV6);
   }
 
   @Get()

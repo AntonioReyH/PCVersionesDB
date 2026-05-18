@@ -5,15 +5,17 @@ import { PrismaService } from '../prisma.service';
 export class IpService {
   constructor(private prisma: PrismaService) {}
 
-  // Ya no recibimos 'notas' por parámetro
-  async registrarIp(addressV4: string) {
-    // Para los registros nuevos desde la v4, la etiqueta será solo la IP 
-    // o un texto estándar, ya que no hay notas.
-    const etiqueta = `${addressV4} | (Generado en v4 sin notas)`;
+  // Agregamos addressV6 como parámetro opcional
+  async registrarIp(addressV4: string, addressV6?: string) {
+    // Mantenemos la etiqueta para el historial de versiones
+    const etiqueta = addressV6 
+      ? `${addressV4} + ${addressV6} | (Generado en v5)`
+      : `${addressV4} | (Generado en v5)`;
 
     return this.prisma.iPRecord.create({
       data: { 
         addressV4, 
+        addressV6: addressV6 || null,
         etiqueta 
       },
     });
