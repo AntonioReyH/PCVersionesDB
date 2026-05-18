@@ -10,7 +10,7 @@ export class IpService {
     return this.prisma.iPRecord.create({
       data: { 
         addressV4: addressV4,
-        addressV6: addressV6 || null
+        notas: notas || null
       },
     });
   }
