@@ -5,17 +5,15 @@ import { PrismaService } from '../prisma.service';
 export class IpService {
   constructor(private prisma: PrismaService) {}
 
-  // Guardar una nueva IP
-  async registrarIpV4(addressV4: string, addressV6?: string) {
+  async registrarIp(addressV4: string, notas?: string) {
     return this.prisma.iPRecord.create({
-      data: { 
-        addressV4: addressV4,
+      data: {
+        addressV4,
         notas: notas || null
       },
     });
   }
 
-  // Listar todas las IPs (nos servirá para ver que funciona)
   async obtenerTodas() {
     return this.prisma.iPRecord.findMany();
   }
