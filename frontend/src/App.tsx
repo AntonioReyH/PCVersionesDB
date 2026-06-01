@@ -13,7 +13,7 @@ function App() {
   const [ips, setIps] = useState<IPRecord[]>([]);
 
   const cargarIps = async () => {
-    const response = await fetch('http://localhost:3000/api/ip');
+    const response = await fetch('/api/ip');
     setIps(await response.json());
   };
 
@@ -21,7 +21,7 @@ function App() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    await fetch('http://localhost:3000/api/ip', {
+    await fetch('/api/ip', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ addressV4, notas: notas ? notas : undefined }),
