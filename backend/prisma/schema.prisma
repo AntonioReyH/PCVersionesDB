@@ -10,7 +10,24 @@ datasource db {
 model IPRecord {
   id        Int      @id @default(autoincrement())
   addressV4 String   @unique
-  addressV6 String?  // <-- NUEVA COLUMNA (Soporte IPv6)
-  etiqueta  String   // Se mantiene de la v3/v4
+  addressV6 String?  
+  etiqueta  String   
+  
   createdAt DateTime @default(now())
+}
+
+model Usuario {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  nombre    String
+  cargoId   String?  // Opcional al principio, hasta que se le asigne uno
+  cargo     Cargo?   @relation(fields: [cargoId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Cargo {
+  id          String    @id @default(uuid())
+  nombre      String    @unique // Ej: "MASTER", "DPO", "AUDITOR_LEGAL", "OPERADOR"
+  descripcion String?
+  usuarios    Usuario[]
 }
